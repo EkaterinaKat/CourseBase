@@ -1,11 +1,13 @@
-package com.katyshevtseva.coursebase.presentation
+package com.katyshevtseva.features_content.presentation
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.katyshevtseva.coursebase.R
-import com.katyshevtseva.coursebase.databinding.ActivityMainBinding
+import com.katyshevtseva.features_content.R
+import com.katyshevtseva.features_content.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,5 +38,9 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
+    }
+
+    companion object {
+        fun newIntent(context: Context) = Intent(context, MainActivity::class.java)
     }
 }

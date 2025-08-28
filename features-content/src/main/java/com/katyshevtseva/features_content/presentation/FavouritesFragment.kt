@@ -1,11 +1,11 @@
-package com.katyshevtseva.coursebase.presentation
+package com.katyshevtseva.features_content.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.katyshevtseva.coursebase.R
+import com.katyshevtseva.features_content.R
 
 class FavouritesFragment : Fragment() {
 

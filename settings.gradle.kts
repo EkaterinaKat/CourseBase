@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "CourseBase"
 include(":app")
- 
+include(":auth")
+include(":features-content")

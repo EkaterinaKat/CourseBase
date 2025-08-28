@@ -16,6 +16,6 @@ local.properties
 
 /.idea
 
-/app/build/
+build/
 
 /token.properties
