@@ -1,14 +1,20 @@
 package com.katyshevtseva.features_content.di
 
 import android.app.Application
+import com.katyshevtseva.features_content.presentation.HomeFragment
 import dagger.BindsInstance
 import dagger.Component
 
 @ApplicationScope
-@Component
+@Component(
+    modules = [
+        ViewModelModule::class,
+        DataModule::class
+    ]
+)
 interface FeatureContentComponent {
 
-    fun getApplication(): Application
+    fun inject(fragment: HomeFragment)
 
     @Component.Factory
     interface Factory {

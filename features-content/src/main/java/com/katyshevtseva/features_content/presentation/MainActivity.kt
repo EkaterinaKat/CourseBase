@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             val selectedFragment: Fragment = when (item.itemId) {
-                R.id.navigation_home -> HomeFragment()
-                R.id.navigation_favorites -> FavouritesFragment()
-                R.id.navigation_account -> AccountFragment()
+                R.id.navigation_home -> HomeFragment.newInstance()
+                R.id.navigation_favorites -> FavouritesFragment.newInstance()
+                R.id.navigation_account -> AccountFragment.newInstance()
                 else -> throw RuntimeException("Unknown item id")
             }
 
