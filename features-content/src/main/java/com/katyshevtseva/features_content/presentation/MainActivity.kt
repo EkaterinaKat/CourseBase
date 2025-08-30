@@ -3,9 +3,9 @@ package com.katyshevtseva.features_content.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.katyshevtseva.features_content.ComponentContainer
 import com.katyshevtseva.features_content.R
 import com.katyshevtseva.features_content.databinding.ActivityMainBinding
 
@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        ComponentContainer.initComponent(application)
+
         setupBottomNavigationView()
     }
 
@@ -30,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_account -> AccountFragment()
                 else -> throw RuntimeException("Unknown item id")
             }
-            Log.i("tag8762", "$selectedFragment")
+
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_fragment_container, selectedFragment)
