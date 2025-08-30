@@ -1,7 +1,6 @@
 package com.katyshevtseva.features_content.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.katyshevtseva.features_content.ComponentContainer
 import com.katyshevtseva.features_content.R
 import com.katyshevtseva.features_content.databinding.FragmentHomeBinding
+import com.katyshevtseva.features_content.presentation.adapter.CourseAdapter
 import com.katyshevtseva.features_content.presentation.util.showAlertDialog
 import com.katyshevtseva.features_content.presentation.viewmodel.HomeViewModel
 import com.katyshevtseva.features_content.presentation.viewmodel.ViewModelFactory
@@ -28,6 +28,8 @@ class HomeFragment : Fragment() {
     private val binding: FragmentHomeBinding
         get() = _binding ?: throw RuntimeException("FragmentHomeBinding is null")
 
+    private val courseAdapter = CourseAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,14 +40,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         ComponentContainer.component.inject(this)
         observeViewModel()
+        binding.coursesRecyclerView.setAdapter(courseAdapter)
     }
 
     private fun observeViewModel() {
         viewModel.coursesLD.observe(viewLifecycleOwner) {
-            Log.i("tag852369741", it.toString()) //todo
+            courseAdapter.submitList(it)
         }
         viewModel.errorLD.observe(viewLifecycleOwner) {
             showAlertDialog(

@@ -5,30 +5,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent">
 
-
-    <Spinner
-        android:id="@+id/sortTypeSpinner"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/searchEt"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@id/filterButton"
+        app:layout_constraintEnd_toStartOf="@+id/filterButton"
+        app:layout_constraintStart_toStartOf="@+id/coursesRecyclerView" />
 
     <ImageButton
         android:id="@+id/filterButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="15dp"
-        android:background="@drawable/home"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/filter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/moviesRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+    <ImageView
+        android:id="@+id/sortImageView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/home"
+        app:layout_constraintBottom_toBottomOf="@id/sortButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filterButton" />
+
+    <Button
+        android:id="@+id/sortButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sort_button_text"
+        app:layout_constraintEnd_toStartOf="@id/sortImageView"
+        app:layout_constraintTop_toBottomOf="@id/filterButton" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/coursesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/sortButton" />
 
     <ProgressBar
         android:id="@+id/loadingProgressBar"

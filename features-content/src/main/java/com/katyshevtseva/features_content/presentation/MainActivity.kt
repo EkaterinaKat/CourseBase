@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.main_fragment_container, selectedFragment)
+                .replace(R.id.mainFragmentContainer, selectedFragment)
                 .commit()
 
             true
