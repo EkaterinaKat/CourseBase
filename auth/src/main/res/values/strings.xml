@@ -7,4 +7,6 @@
     <string name="dont_have_an_account">Нету аккаунта?</string>
     <string name="registry">Регистрация</string>
     <string name="forgot_password">Забыл пароль</string>
+    <string name="incorrect_email">Неверный адрес электронной почты</string>
+    <string name="empty_password">Поле пароля не может быть пустым</string>
 </resources>

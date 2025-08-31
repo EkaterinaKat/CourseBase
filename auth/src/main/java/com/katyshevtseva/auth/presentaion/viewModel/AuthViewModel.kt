@@ -1,23 +1,30 @@
 package com.katyshevtseva.auth.presentaion.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.katyshevtseva.auth.domain.usecase.CheckCredentialsUseCase
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AuthViewModel @Inject constructor(
+    private val checkCredentialsUseCase: CheckCredentialsUseCase
 ) : ViewModel() {
 
-    private val _errorLD = MutableLiveData<String>()
-    val errorLD: LiveData<String>
-        get() = _errorLD
+    private val _credentialsAreValidLD = MutableLiveData<Boolean>()
+    val credentialsAreValidLD: LiveData<Boolean>
+        get() = _credentialsAreValidLD
 
-    private val _successLD = MutableLiveData<Unit>()
-    val successLD: LiveData<Unit>
-        get() = _successLD
+    private var checkCredentialsDelayJob: Job? = null
 
-    fun login(email: String, pass: String) {
-        Log.i("tag852741963", "$email $pass")
+    fun onCredentialsInput(email: String, pass: String) {
+        checkCredentialsDelayJob?.cancel()
+        checkCredentialsDelayJob = viewModelScope.launch {
+            delay(500)
+            _credentialsAreValidLD.value = checkCredentialsUseCase.invoke(email, pass)
+        }
     }
 }

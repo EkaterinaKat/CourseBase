@@ -6,7 +6,8 @@ import dagger.Component
 @AuthScope
 @Component(
     modules = [
-        ViewModelModule::class
+        ViewModelModule::class,
+        DataModule::class
     ]
 )
 interface AuthComponent {

@@ -3,11 +3,13 @@ package com.katyshevtseva.auth.presentaion
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.katyshevtseva.auth.ComponentContainer
 import com.katyshevtseva.auth.databinding.ActivityAuthBinding
+import com.katyshevtseva.auth.presentaion.util.inputFilter
 import com.katyshevtseva.auth.presentaion.viewModel.AuthViewModel
 import com.katyshevtseva.auth.presentaion.viewModel.ViewModelFactory
 import javax.inject.Inject
@@ -30,27 +32,42 @@ class AuthActivity : AppCompatActivity() {
         setContentView(binding.root)
         ComponentContainer.component.inject(this)
 
-        setListeners()
+        setButtonListeners()
+        setTextWatchers()
         observeViewModel()
+
+        binding.emailEt.filters = arrayOf(inputFilter)
     }
 
-    private fun setListeners() {
+    private fun setButtonListeners() {
         binding.loginButton.setOnClickListener {
-            viewModel.login(
-                binding.emailEt.text.toString(),
-                binding.passEt.text.toString()
-            )
+            setResult(RESULT_OK)
+            finish()
         }
     }
 
     private fun observeViewModel() {
-        viewModel.errorLD.observe(this) {
-            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        viewModel.credentialsAreValidLD.observe(this) {
+            binding.loginButton.isEnabled = it
         }
-        viewModel.successLD.observe(this) {
-            setResult(RESULT_OK)
-            finish()
+    }
+
+    private val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            viewModel.onCredentialsInput(
+                binding.emailEt.text.toString(),
+                binding.passEt.text.toString()
+            )
         }
+
+        override fun afterTextChanged(s: Editable?) {}
+    }
+
+    private fun setTextWatchers() {
+        binding.emailEt.addTextChangedListener(textWatcher)
+        binding.passEt.addTextChangedListener(textWatcher)
     }
 
     companion object {
