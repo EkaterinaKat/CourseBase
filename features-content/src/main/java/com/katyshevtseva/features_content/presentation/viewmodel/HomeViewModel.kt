@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.katyshevtseva.features_content.domain.model.Course
+import com.katyshevtseva.features_content.domain.model.SortMethod
+import com.katyshevtseva.features_content.domain.model.SortMethod.PUBLISH_DATE_ASC
+import com.katyshevtseva.features_content.domain.model.SortMethod.PUBLISH_DATE_DESC
 import com.katyshevtseva.features_content.domain.usecase.GetAllCoursesUseCase
 import com.katyshevtseva.features_content.domain.usecase.MarkFavouriteUseCase
 import com.katyshevtseva.features_content.domain.usecase.UnmarkFavouriteUseCase
@@ -29,6 +32,8 @@ class HomeViewModel @Inject constructor(
     val loadingLD: LiveData<Boolean>
         get() = _loadingLD
 
+    private var sortMethod: SortMethod? = null
+
     init {
         loadCourses()
     }
@@ -37,7 +42,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             _loadingLD.value = true
             try {
-                _coursesLD.value = getAllCoursesUseCase()
+                _coursesLD.value = getAllCoursesUseCase(sortMethod)
             } catch (e: Exception) {
                 _errorLD.value = Unit
             }
@@ -56,5 +61,18 @@ class HomeViewModel @Inject constructor(
                 loadCourses()
             }
         }
+    }
+
+    fun sortButtonListener() {
+        sortMethod = when (sortMethod) {
+            PUBLISH_DATE_DESC -> {
+                PUBLISH_DATE_ASC
+            }
+
+            PUBLISH_DATE_ASC, null -> {
+                PUBLISH_DATE_DESC
+            }
+        }
+        loadCourses()
     }
 }

@@ -1,5 +1,6 @@
 package com.katyshevtseva.features_content.presentation.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -8,7 +9,9 @@ import com.katyshevtseva.features_content.R
 import com.katyshevtseva.features_content.databinding.CourseItemBinding
 import com.katyshevtseva.features_content.domain.model.Course
 
-class CourseAdapter : ListAdapter<Course, CourseViewHolder>(CourseItemDiffCallback()) {
+class CourseAdapter(
+    val context: Context
+) : ListAdapter<Course, CourseViewHolder>(CourseItemDiffCallback()) {
 
     var likeButtonListener: ((Course) -> Unit)? = null
 
@@ -37,8 +40,9 @@ class CourseAdapter : ListAdapter<Course, CourseViewHolder>(CourseItemDiffCallba
             titleTv.text = course.title
             textTv.text = course.text
             rateTv.text = course.rate
-            startDateTv.text = course.startDate
+            startDateTv.text = context.getString(R.string.start_date, course.startDate)
             priceTv.text = course.price
+            publishDateTv.text = context.getString(R.string.publish_date, course.publishDate)
             likeButton.setBackgroundResource(likeButtonResource)
             likeButton.setOnClickListener { likeButtonListener?.invoke(course) }
         }

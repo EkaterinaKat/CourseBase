@@ -7,7 +7,15 @@ class RemoteDataSource @Inject constructor(
     private val apiService: ApiService
 ) {
 
+    private var cache: List<CourseDto>? = null
+
     suspend fun getAllCourses(): List<CourseDto> {
-        return apiService.getCourses().body()?.courses ?: throw RuntimeException()
+        val result: List<CourseDto> =
+            cache ?: apiService.getCourses().body()?.courses ?: throw RuntimeException()
+
+        if (cache == null) {
+            cache = result
+        }
+        return result
     }
 }

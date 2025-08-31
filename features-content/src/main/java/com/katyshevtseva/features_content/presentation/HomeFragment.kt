@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
     private val binding: FragmentHomeBinding
         get() = _binding ?: throw RuntimeException("FragmentHomeBinding is null")
 
-    private val courseAdapter = CourseAdapter()
+    private lateinit var courseAdapter: CourseAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +43,11 @@ class HomeFragment : Fragment() {
         ComponentContainer.component.inject(this)
         observeViewModel()
 
+        courseAdapter = CourseAdapter(requireActivity())
         binding.coursesRecyclerView.setAdapter(courseAdapter)
         courseAdapter.likeButtonListener = { viewModel.likeButtonListener(it) }
+
+        binding.sortButton.setOnClickListener { viewModel.sortButtonListener() }
     }
 
     private fun observeViewModel() {

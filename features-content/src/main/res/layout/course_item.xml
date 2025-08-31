@@ -33,7 +33,7 @@
             android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@id/rateTv"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="22 Мая 2024" />
+            tools:text="Старт 22 Мая 2024" />
 
         <TextView
             android:id="@+id/titleTv"
@@ -58,6 +58,17 @@
             tools:text="Text " />
 
         <TextView
+            android:id="@+id/publishDateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textTv"
+            tools:text="Дата публикации: 22 Мая 2024" />
+
+        <TextView
             android:id="@+id/priceTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +76,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textTv"
+            app:layout_constraintTop_toBottomOf="@id/publishDateTv"
             tools:text="999 Р" />
 
         <ImageButton

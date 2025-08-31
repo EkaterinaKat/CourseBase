@@ -28,7 +28,7 @@ class FavouritesFragment : Fragment() {
     private val binding: FragmentFavouritesBinding
         get() = _binding ?: throw RuntimeException("FragmentFavouritesBinding is null")
 
-    private val courseAdapter = CourseAdapter()
+    private lateinit var courseAdapter: CourseAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,10 +41,12 @@ class FavouritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ComponentContainer.component.inject(this)
-        observeViewModel()
 
+        courseAdapter = CourseAdapter(requireActivity())
         binding.coursesRecyclerView.setAdapter(courseAdapter)
         courseAdapter.likeButtonListener = { viewModel.likeButtonListener(it) }
+
+        observeViewModel()
     }
 
     private fun observeViewModel() {
