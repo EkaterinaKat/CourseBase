@@ -16,6 +16,6 @@ class CourseItemDiffCallback : DiffUtil.ItemCallback<Course>() {
         oldItem: Course,
         newItem: Course
     ): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.id == newItem.id && oldItem.favourite == newItem.favourite
     }
 }

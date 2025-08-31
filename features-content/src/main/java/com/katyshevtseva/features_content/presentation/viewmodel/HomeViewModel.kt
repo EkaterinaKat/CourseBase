@@ -6,11 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.katyshevtseva.features_content.domain.model.Course
 import com.katyshevtseva.features_content.domain.usecase.GetAllCoursesUseCase
+import com.katyshevtseva.features_content.domain.usecase.MarkFavouriteUseCase
+import com.katyshevtseva.features_content.domain.usecase.UnmarkFavouriteUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    private val getAllCoursesUseCase: GetAllCoursesUseCase
+    private val getAllCoursesUseCase: GetAllCoursesUseCase,
+    private val markFavouriteUseCase: MarkFavouriteUseCase,
+    private val unmarkFavouriteUseCase: UnmarkFavouriteUseCase
 ) : ViewModel() {
 
     private val _coursesLD = MutableLiveData<List<Course>>()
@@ -38,6 +42,19 @@ class HomeViewModel @Inject constructor(
                 _errorLD.value = Unit
             }
             _loadingLD.value = false
+        }
+    }
+
+    fun likeButtonListener(course: Course) {
+        viewModelScope.launch {
+            val success = if (course.favourite) {
+                unmarkFavouriteUseCase(course)
+            } else {
+                markFavouriteUseCase(course)
+            }
+            if (success) {
+                loadCourses()
+            }
         }
     }
 }

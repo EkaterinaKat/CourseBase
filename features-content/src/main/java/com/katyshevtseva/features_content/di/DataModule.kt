@@ -1,5 +1,8 @@
 package com.katyshevtseva.features_content.di
 
+import android.app.Application
+import com.katyshevtseva.features_content.data.local.CourseDao
+import com.katyshevtseva.features_content.data.local.CourseDatabase
 import com.katyshevtseva.features_content.data.remote.ApiFactory
 import com.katyshevtseva.features_content.data.remote.ApiService
 import com.katyshevtseva.features_content.data.repo.CourseRepositoryImpl
@@ -21,6 +24,12 @@ interface DataModule {
         @ApplicationScope
         fun provideApiService(apiFactory: ApiFactory): ApiService {
             return apiFactory.apiService
+        }
+
+        @Provides
+        @ApplicationScope
+        fun provideCourseDao(application: Application): CourseDao {
+            return CourseDatabase.getInstance(application).courseDao()
         }
     }
 }

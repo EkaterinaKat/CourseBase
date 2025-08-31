@@ -42,7 +42,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         ComponentContainer.component.inject(this)
         observeViewModel()
+
         binding.coursesRecyclerView.setAdapter(courseAdapter)
+        courseAdapter.likeButtonListener = { viewModel.likeButtonListener(it) }
     }
 
     private fun observeViewModel() {

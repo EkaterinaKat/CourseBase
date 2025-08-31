@@ -70,10 +70,10 @@
 
         <ImageButton
             android:id="@+id/likeButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:background="@drawable/home"
+            android:background="@drawable/bookmark_empty"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
