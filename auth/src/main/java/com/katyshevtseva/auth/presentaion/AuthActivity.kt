@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.katyshevtseva.auth.ComponentContainer
 import com.katyshevtseva.auth.databinding.ActivityAuthBinding
+import com.katyshevtseva.auth.presentaion.util.OK_URL
+import com.katyshevtseva.auth.presentaion.util.VK_URL
+import com.katyshevtseva.auth.presentaion.util.browseUrl
 import com.katyshevtseva.auth.presentaion.util.inputFilter
 import com.katyshevtseva.auth.presentaion.viewModel.AuthViewModel
 import com.katyshevtseva.auth.presentaion.viewModel.ViewModelFactory
@@ -44,6 +47,8 @@ class AuthActivity : AppCompatActivity() {
             setResult(RESULT_OK)
             finish()
         }
+        binding.vkButton.setOnClickListener { browseUrl(this, VK_URL) }
+        binding.okButton.setOnClickListener { browseUrl(this, OK_URL) }
     }
 
     private fun observeViewModel() {
