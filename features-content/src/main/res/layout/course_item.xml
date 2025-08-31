@@ -50,12 +50,15 @@
             android:id="@+id/textTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:ellipsize="end"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
+            android:maxLines="2"
             app:layout_constraintTop_toBottomOf="@id/titleTv"
-            tools:text="Text " />
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text " />
 
         <TextView
             android:id="@+id/publishDateTv"
@@ -77,6 +80,7 @@
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/publishDateTv"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="999 Р" />
 
         <ImageButton
