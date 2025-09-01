@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.katyshevtseva.features_content.ComponentContainer
 import com.katyshevtseva.features_content.R
 import com.katyshevtseva.features_content.databinding.ActivityMainBinding
@@ -15,6 +14,8 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    private var activeNavItemId: Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -22,24 +23,34 @@ class MainActivity : AppCompatActivity() {
         ComponentContainer.initComponent(application)
 
         setupBottomNavigationView()
+
+        selectItem(R.id.navigation_home)
     }
 
     private fun setupBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            val selectedFragment: Fragment = when (item.itemId) {
-                R.id.navigation_home -> HomeFragment.newInstance()
-                R.id.navigation_favorites -> FavouritesFragment.newInstance()
-                R.id.navigation_account -> AccountFragment.newInstance()
-                else -> throw RuntimeException("Unknown item id")
+            if (item.itemId != activeNavItemId) {
+                selectItem(item.itemId)
             }
-
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.mainFragmentContainer, selectedFragment)
-                .commit()
-
             true
         }
+    }
+
+    private fun selectItem(navItemId: Int) {
+
+        activeNavItemId = navItemId
+
+        val fragment = when (navItemId) {
+            R.id.navigation_home -> HomeFragment.newInstance()
+            R.id.navigation_favorites -> FavouritesFragment.newInstance()
+            R.id.navigation_account -> AccountFragment.newInstance()
+            else -> throw RuntimeException("Unknown item id")
+        }
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.mainFragmentContainer, fragment)
+            .commit()
     }
 
     companion object {
