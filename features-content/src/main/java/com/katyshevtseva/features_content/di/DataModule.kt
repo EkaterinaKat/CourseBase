@@ -15,19 +15,19 @@ import dagger.Provides
 interface DataModule {
 
     @Binds
-    @ApplicationScope
+    @FeatureContentScope
     fun bindCourseRepository(impl: CourseRepositoryImpl): CourseRepository
 
     companion object {
 
         @Provides
-        @ApplicationScope
+        @FeatureContentScope
         fun provideApiService(apiFactory: ApiFactory): ApiService {
             return apiFactory.apiService
         }
 
         @Provides
-        @ApplicationScope
+        @FeatureContentScope
         fun provideCourseDao(application: Application): CourseDao {
             return CourseDatabase.getInstance(application).courseDao()
         }

@@ -6,7 +6,7 @@ import com.katyshevtseva.features_content.presentation.HomeFragment
 import dagger.BindsInstance
 import dagger.Component
 
-@ApplicationScope
+@FeatureContentScope
 @Component(
     modules = [
         ViewModelModule::class,

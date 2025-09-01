@@ -1,12 +1,12 @@
 package com.katyshevtseva.features_content.data.remote
 
-import com.katyshevtseva.features_content.di.ApplicationScope
+import com.katyshevtseva.features_content.di.FeatureContentScope
 import jakarta.inject.Inject
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-@ApplicationScope
+@FeatureContentScope
 class ApiFactory @Inject constructor() {
 
     private val okHttpClient = OkHttpClient.Builder().build()
