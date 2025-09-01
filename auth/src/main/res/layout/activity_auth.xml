@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -79,26 +80,34 @@
         android:layout_height="wrap_content"
         android:text="@string/forgot_password" />
 
-    <LinearLayout
-        android:id="@+id/socialNetworkLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:id="@+id/socialNetworkLayout"
+        android:layout_marginTop="30dp">
 
-        <Button
+        <ImageButton
+            android:layout_width="150dp"
             android:id="@+id/vkButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Вконтакте" />
+            android:layout_height="50dp"
+            android:background="@drawable/vk_background"
+            android:scaleType="fitCenter"
+            android:src="@drawable/vk_logo"
+            app:layout_constraintEnd_toStartOf="@+id/okButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <ImageButton
             android:id="@+id/okButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Одноклассники" />
-
-    </LinearLayout>
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ok_background"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ok_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/vkButton"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

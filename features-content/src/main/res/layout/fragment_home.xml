@@ -6,6 +6,9 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:drawableStart="@drawable/loupe"
+        android:drawablePadding="8dp"
+        android:hint="@string/search_courses"
         android:id="@+id/searchEt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -18,8 +21,8 @@
 
     <ImageButton
         android:id="@+id/filterButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_margin="10dp"
         android:background="@drawable/filter"
         app:layout_constraintEnd_toEndOf="parent"

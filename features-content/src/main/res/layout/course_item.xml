@@ -12,16 +12,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/rateTv"
+        <LinearLayout
+            android:id="@+id/rateLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textColor="@color/grey"
-            android:textSize="15sp"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="4.9" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/star" />
+
+            <TextView
+                android:id="@+id/rateTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+                tools:text="4.9" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/startDateTv"
@@ -31,7 +44,7 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/grey"
             android:textSize="15sp"
-            app:layout_constraintStart_toEndOf="@id/rateTv"
+            app:layout_constraintStart_toEndOf="@id/rateLayout"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Старт 22 Мая 2024" />
 
@@ -43,7 +56,7 @@
             android:textColor="@color/black"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rateTv"
+            app:layout_constraintTop_toBottomOf="@id/rateLayout"
             tools:text="Title" />
 
         <TextView

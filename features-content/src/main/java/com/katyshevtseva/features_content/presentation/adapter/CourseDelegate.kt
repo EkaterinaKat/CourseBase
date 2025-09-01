@@ -42,7 +42,7 @@ class CourseDelegate(
         fun bind(course: CourseItem) {
 
             val likeButtonResource = if (course.favourite) {
-                R.drawable.bookmark_filled
+                R.drawable.bookmark_filled_green
             } else {
                 R.drawable.bookmark_empty
             }
@@ -56,7 +56,11 @@ class CourseDelegate(
                         R.string.start_date,
                         PresentationDateParser.reformat(course.startDate)
                     )
-                priceTv.text = course.price
+                priceTv.text =
+                    context.getString(
+                        R.string.price_tag,
+                        course.price
+                    )
                 publishDateTv.text =
                     context.getString(
                         R.string.publish_date,
