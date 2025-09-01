@@ -9,7 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.katyshevtseva.features_content.ComponentContainer
 import com.katyshevtseva.features_content.R
 import com.katyshevtseva.features_content.databinding.FragmentHomeBinding
-import com.katyshevtseva.features_content.presentation.adapter.CourseAdapter
+import com.katyshevtseva.features_content.presentation.adapter.CompositeCourseAdapter
+import com.katyshevtseva.features_content.presentation.util.mapDomainModelToListItem
+import com.katyshevtseva.features_content.presentation.util.mapListItemToDomainModel
 import com.katyshevtseva.features_content.presentation.util.showAlertDialog
 import com.katyshevtseva.features_content.presentation.viewmodel.HomeViewModel
 import com.katyshevtseva.features_content.presentation.viewmodel.ViewModelFactory
@@ -28,7 +30,7 @@ class HomeFragment : Fragment() {
     private val binding: FragmentHomeBinding
         get() = _binding ?: throw RuntimeException("FragmentHomeBinding is null")
 
-    private lateinit var courseAdapter: CourseAdapter
+    private lateinit var courseAdapter: CompositeCourseAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,16 +45,17 @@ class HomeFragment : Fragment() {
         ComponentContainer.component.inject(this)
         observeViewModel()
 
-        courseAdapter = CourseAdapter(requireActivity())
+        courseAdapter = CompositeCourseAdapter(requireActivity()) {
+            viewModel.likeButtonListener(mapListItemToDomainModel(it))
+        }
         binding.coursesRecyclerView.setAdapter(courseAdapter)
-        courseAdapter.likeButtonListener = { viewModel.likeButtonListener(it) }
 
         binding.sortButton.setOnClickListener { viewModel.sortButtonListener() }
     }
 
     private fun observeViewModel() {
         viewModel.coursesLD.observe(viewLifecycleOwner) {
-            courseAdapter.submitList(it)
+            courseAdapter.submitList(it.map { mapDomainModelToListItem(it) })
         }
         viewModel.errorLD.observe(viewLifecycleOwner) {
             showAlertDialog(
