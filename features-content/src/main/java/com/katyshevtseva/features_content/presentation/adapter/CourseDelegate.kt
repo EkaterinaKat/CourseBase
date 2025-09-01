@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.katyshevtseva.features_content.R
 import com.katyshevtseva.features_content.databinding.CourseItemBinding
+import com.katyshevtseva.features_content.presentation.util.PresentationDateParser
 
 class CourseDelegate(
     private val context: Context,
@@ -17,7 +18,7 @@ class CourseDelegate(
         items[position] is CourseItem
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
-        CourseViewHolder2(
+        CourseViewHolder(
             context,
             CourseItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             likeButtonListener
@@ -29,10 +30,10 @@ class CourseDelegate(
         holder: RecyclerView.ViewHolder,
         payloads: MutableList<Any>
     ) {
-        (holder as CourseViewHolder2).bind(items[position] as CourseItem)
+        (holder as CourseViewHolder).bind(items[position] as CourseItem)
     }
 
-    class CourseViewHolder2( //todo
+    class CourseViewHolder(
         val context: Context,
         val binding: CourseItemBinding,
         val likeButtonListener: ((CourseItem) -> Unit)?
@@ -50,9 +51,17 @@ class CourseDelegate(
                 titleTv.text = course.title
                 textTv.text = course.text
                 rateTv.text = course.rate
-                startDateTv.text = context.getString(R.string.start_date, course.startDate)
+                startDateTv.text =
+                    context.getString(
+                        R.string.start_date,
+                        PresentationDateParser.reformat(course.startDate)
+                    )
                 priceTv.text = course.price
-                publishDateTv.text = context.getString(R.string.publish_date, course.publishDate)
+                publishDateTv.text =
+                    context.getString(
+                        R.string.publish_date,
+                        PresentationDateParser.reformat(course.publishDate)
+                    )
                 likeButton.setBackgroundResource(likeButtonResource)
                 likeButton.setOnClickListener { likeButtonListener?.invoke(course) }
             }
