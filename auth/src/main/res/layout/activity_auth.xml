@@ -52,6 +52,8 @@
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:enabled="false"
         android:text="@string/login" />
 
     <LinearLayout
@@ -59,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <TextView
@@ -66,30 +69,34 @@
             android:layout_height="wrap_content"
             android:text="@string/dont_have_an_account" />
 
-        <Button
+        <TextView
             android:id="@+id/registryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/TextViewButtonStyle"
+            android:layout_marginStart="8dp"
             android:text="@string/registry" />
 
     </LinearLayout>
 
-    <Button
+    <TextView
         android:id="@+id/forgotPassButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/TextViewButtonStyle"
+        android:layout_marginTop="5dp"
         android:text="@string/forgot_password" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/socialNetworkLayout"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="40dp">
 
         <ImageButton
-            android:layout_width="150dp"
+            android:layout_width="160dp"
             android:id="@+id/vkButton"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:background="@drawable/vk_background"
             android:scaleType="fitCenter"
             android:src="@drawable/vk_logo"
@@ -99,8 +106,8 @@
 
         <ImageButton
             android:id="@+id/okButton"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
             android:background="@drawable/ok_background"
             android:padding="5dp"
             android:scaleType="fitCenter"
